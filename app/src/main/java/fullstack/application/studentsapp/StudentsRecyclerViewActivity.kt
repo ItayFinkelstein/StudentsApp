@@ -60,23 +60,23 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         adapter.listener = object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on item in position: $position")
-
                 val student = students?.get(position)
-                val intent = Intent(this@StudentsRecyclerViewActivity, StudentDetailsActivity::class.java)
-                intent.putExtra("student_id", student?.id)
-                intent.putExtra("student_name", student?.name)
-                intent.putExtra("student_checked", student?.isChecked)
+                val intent = createStudentDetailsIntent(student)
                 startActivity(intent)
             }
 
             override fun onItemClick(student: Student?) {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on student: ${student?.id} - ${student?.name}")
-
-                val intent = Intent(this@StudentsRecyclerViewActivity, StudentDetailsActivity::class.java)
-                intent.putExtra("student_id", student?.id)
-                intent.putExtra("student_name", student?.name)
-                intent.putExtra("student_checked", student?.isChecked)
+                val intent = createStudentDetailsIntent(student)
                 startActivity(intent)
+            }
+
+            private fun createStudentDetailsIntent(student: Student?): Intent {
+                return Intent(this@StudentsRecyclerViewActivity, StudentDetailsActivity::class.java).apply {
+                    putExtra("student_id", student?.id)
+                    putExtra("student_name", student?.name)
+                    putExtra("student_checked", student?.isChecked)
+                }
             }
         }
 

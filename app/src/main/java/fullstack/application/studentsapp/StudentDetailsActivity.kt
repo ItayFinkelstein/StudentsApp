@@ -1,6 +1,7 @@
 package fullstack.application.studentsapp
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -26,6 +27,8 @@ class StudentDetailsActivity : AppCompatActivity() {
 
         findViewById<TextView>(details_activity_student_id_value_text_view).text = studentId
         findViewById<TextView>(R.id.details_activity_student_name_value_text_view).text = studentName
-        findViewById<CheckBox>(R.id.details_activity_student_check_box).isChecked = studentChecked
+        val checked = findViewById<CheckBox>(R.id.details_activity_student_check_box)
+        checked.isChecked = studentChecked
+        checked.isEnabled = false
     }
 }
