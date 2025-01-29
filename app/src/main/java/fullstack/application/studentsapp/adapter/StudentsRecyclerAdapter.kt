@@ -18,6 +18,7 @@ class StudentsRecyclerAdapter(private val students: MutableList<Student> = mutab
             parent,
             false
         )
+
         return StudentViewHolder(itemView, listener)
     }
 

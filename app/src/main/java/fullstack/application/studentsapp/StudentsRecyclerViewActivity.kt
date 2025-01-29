@@ -1,7 +1,9 @@
 package fullstack.application.studentsapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,6 +36,12 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         }
 
         setupRecyclerView()
+
+        val addStudentButton: Button = findViewById(R.id.activity_students_add_button)
+        addStudentButton.setOnClickListener {
+            val intent = Intent(this, StudentDetailsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -52,10 +60,23 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         adapter.listener = object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on item in position: $position")
+                val student = students?.get(position)
+                val intent = createStudentDetailsIntent(student)
+                startActivity(intent)
             }
 
             override fun onItemClick(student: Student?) {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on student: ${student?.id} - ${student?.name}")
+                val intent = createStudentDetailsIntent(student)
+                startActivity(intent)
+            }
+
+            private fun createStudentDetailsIntent(student: Student?): Intent {
+                return Intent(this@StudentsRecyclerViewActivity, StudentDetailsActivity::class.java).apply {
+                    putExtra("student_id", student?.id)
+                    putExtra("student_name", student?.name)
+                    putExtra("student_checked", student?.isChecked)
+                }
             }
         }
 

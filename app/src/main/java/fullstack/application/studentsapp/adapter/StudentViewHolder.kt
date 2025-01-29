@@ -30,8 +30,6 @@ class StudentViewHolder(itemView: View, listener: OnItemClickListener?): Recycle
         }
 
         itemView.setOnClickListener {
-            Log.d("TAG", "On click listener on item in position: $adapterPosition")
-            listener?.onItemClick(adapterPosition)
             listener?.onItemClick(student)
         }
     }
