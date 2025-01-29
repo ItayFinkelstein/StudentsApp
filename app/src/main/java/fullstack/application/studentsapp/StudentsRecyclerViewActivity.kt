@@ -21,9 +21,12 @@ interface OnItemClickListener {
     fun onItemClick(student: Student?)
 }
 
+var shownStudentPosition: Int? = -1
+
 class StudentsRecyclerViewActivity : AppCompatActivity() {
 
     var students: MutableList<Student>? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,12 +64,14 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
             override fun onItemClick(position: Int) {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on item in position: $position")
                 val student = students?.get(position)
+                shownStudentPosition = position
                 val intent = createStudentDetailsIntent(student)
                 startActivity(intent)
             }
 
             override fun onItemClick(student: Student?) {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on student: ${student?.id} - ${student?.name}")
+                shownStudentPosition = 0
                 val intent = createStudentDetailsIntent(student)
                 startActivity(intent)
             }
@@ -81,5 +86,22 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         }
 
         recyclerView.adapter = adapter
+    }
+
+    override fun onStart() {
+
+        var studentId = intent.getStringExtra("student_id")
+        studentId?.let {
+            var studentName = intent.getStringExtra("student_name")
+            var studentChecked = intent.getBooleanExtra("student_checked", false)
+            if (shownStudentPosition !== -1 && studentName !== null && shownStudentPosition != null && shownStudentPosition in students?.indices ?: emptyList()) {
+                students?.set(shownStudentPosition!!, Student(studentId, studentName, studentChecked))
+            } else {
+                // Handle the case when position or newStudent is null or out of bounds
+                println("Invalid position or student data")
+            }
+        }
+
+        super.onStart()
     }
 }

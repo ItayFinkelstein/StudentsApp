@@ -13,6 +13,9 @@ import fullstack.application.studentsapp.R.id.details_activity_student_id_value_
 import fullstack.application.studentsapp.model.Student
 
 class StudentDetailsActivity : AppCompatActivity() {
+    var studentId: String? = null
+   var studentName: String? = null
+    var studentChecked: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,9 +26,9 @@ class StudentDetailsActivity : AppCompatActivity() {
             insets
         }
 
-        val studentId = intent.getStringExtra("student_id")
-        val studentName = intent.getStringExtra("student_name")
-        val studentChecked = intent.getBooleanExtra("student_checked", false)
+        studentId = intent.getStringExtra("student_id")
+        studentName = intent.getStringExtra("student_name")
+        studentChecked = intent.getBooleanExtra("student_checked", false)
 
         findViewById<TextView>(details_activity_student_id_value_text_view).text = studentId
         findViewById<TextView>(R.id.details_activity_student_name_value_text_view).text = studentName
@@ -45,5 +48,19 @@ class StudentDetailsActivity : AppCompatActivity() {
             putExtra("student_checked", isChecked)
         } } }
         return null;
+    }
+
+    private fun createStudentsRecyclerViewIntent(id: String?, name: String?, isChecked: Boolean): Intent? {
+        id?.let { name?.let { return Intent(this@StudentDetailsActivity, StudentsRecyclerViewActivity::class.java).apply {
+            putExtra("student_id", id)
+            putExtra("student_name", name)
+            putExtra("student_checked", isChecked)
+        } } }
+        return null;
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(createStudentsRecyclerViewIntent(studentId, studentName, studentChecked))
     }
 }
