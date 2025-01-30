@@ -89,7 +89,6 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-
         val studentId = intent.getStringExtra("student_id")
         studentId?.let {
             val studentName = intent.getStringExtra("student_name")
@@ -99,9 +98,15 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
             } else {
                 if (shownStudentPosition === -1 && studentId !== null && studentName !== null) {
                     students?.add(Student(studentId, studentName, studentChecked))
+                } else {
+                    Log.d("StudentsRecyclerViewActivity", "wrong data in onStart")
                 }
-                println("Invalid position or student data")
             }
+        } ?: run {
+            if (shownStudentPosition !== null && shownStudentPosition !== -1) {
+                students?.removeAt(shownStudentPosition!!)
+            }
+            shownStudentPosition = -1
         }
 
         super.onStart()

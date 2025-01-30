@@ -36,6 +36,11 @@ class EditStudentActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        findViewById<Button>(R.id.edit_student_activity_student_delete_button).setOnClickListener {
+            startActivity(Intent(this@EditStudentActivity, StudentsRecyclerViewActivity::class.java))
+            finish()
+        }
         findViewById<Button>(R.id.edit_student_activity_save_button).setOnClickListener {
             studentId = findViewById<EditText>(edit_student_activity_id_value_text_view).text.toString()
             studentName = findViewById<EditText>(edit_student_activity_name_value_text_view).text.toString()
