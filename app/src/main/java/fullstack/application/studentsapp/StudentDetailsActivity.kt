@@ -29,11 +29,12 @@ class StudentDetailsActivity : AppCompatActivity() {
         studentId = intent.getStringExtra("student_id")
         studentName = intent.getStringExtra("student_name")
         studentChecked = intent.getBooleanExtra("student_checked", false)
+        var position = intent.getIntExtra("student_position", -1)
 
         findViewById<TextView>(details_activity_student_id_value_text_view).text = studentId
         findViewById<TextView>(R.id.details_activity_student_name_value_text_view).text = studentName
         findViewById<Button>(R.id.details_activity_student_edit_button).setOnClickListener {
-            val intent = createEditStudentIntent(studentId, studentName, studentChecked)
+            val intent = createEditStudentIntent(studentId, studentName, studentChecked, position)
             startActivity(intent)
         }
         val checked = findViewById<CheckBox>(R.id.details_activity_student_check_box)
@@ -41,11 +42,12 @@ class StudentDetailsActivity : AppCompatActivity() {
         checked.isEnabled = false
     }
 
-    private fun createEditStudentIntent(id: String?, name: String?, isChecked: Boolean): Intent? {
+    private fun createEditStudentIntent(id: String?, name: String?, isChecked: Boolean, position: Int): Intent? {
         id?.let { name?.let { return Intent(this@StudentDetailsActivity, EditStudentActivity::class.java).apply {
             putExtra("student_id", id)
             putExtra("student_name", name)
             putExtra("student_checked", isChecked)
+            putExtra("student_position", position)
         } } }
         return null;
     }

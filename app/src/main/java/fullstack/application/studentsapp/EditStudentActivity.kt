@@ -14,6 +14,8 @@ import fullstack.application.studentsapp.R.id.details_activity_student_id_value_
 import fullstack.application.studentsapp.R.id.edit_student_activity_check_box
 import fullstack.application.studentsapp.R.id.edit_student_activity_id_value_text_view
 import fullstack.application.studentsapp.R.id.edit_student_activity_name_value_text_view
+import fullstack.application.studentsapp.model.Model
+import fullstack.application.studentsapp.model.Student
 
 class EditStudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,7 @@ class EditStudentActivity : AppCompatActivity() {
         var studentId = intent.getStringExtra("student_id")
         var studentName = intent.getStringExtra("student_name")
         var studentChecked = intent.getBooleanExtra("student_checked", false)
+        val position = intent.getIntExtra("student_position", -1)
 
         findViewById<EditText>(edit_student_activity_id_value_text_view).setText(studentId)
         findViewById<TextView>(edit_student_activity_name_value_text_view).setText(studentName)
@@ -38,13 +41,24 @@ class EditStudentActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.edit_student_activity_student_delete_button).setOnClickListener {
+            Model.shared.students.removeAt(position)
             startActivity(Intent(this@EditStudentActivity, StudentsRecyclerViewActivity::class.java))
             finish()
         }
         findViewById<Button>(R.id.edit_student_activity_save_button).setOnClickListener {
             studentId = findViewById<EditText>(edit_student_activity_id_value_text_view).text.toString()
             studentName = findViewById<EditText>(edit_student_activity_name_value_text_view).text.toString()
-            studentChecked = findViewById<CheckBox>(edit_student_activity_check_box).isActivated;
+            studentChecked = findViewById<CheckBox>(edit_student_activity_check_box).isActivated
+                studentId.let {
+                    studentName.let {
+                        if (position !== -1) {
+                            Model.shared.students[position] =
+                                Student(studentId!!, studentName!!, studentChecked)
+                        } else {
+                            Model.shared.students.add(Student(studentId!!, studentName!!, studentChecked))
+                    }
+                }
+            }
             val intent = createEditStudentIntent(studentId, studentName, studentChecked)
             startActivity(intent)
             finish()
