@@ -39,7 +39,7 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
         val addStudentButton: Button = findViewById(R.id.activity_students_add_button)
         addStudentButton.setOnClickListener {
-            val intent = Intent(this, EditStudentActivity::class.java).apply {
+            val intent = Intent(this, AddStudentActivity::class.java).apply {
             }
             startActivity(intent)
         }
@@ -61,7 +61,7 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         adapter.listener = object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on item in position: $position")
-                val student = Model.shared.students.get(position)
+                val student = Model.shared.students[position]
                 shownStudentPosition = position
                 val intent = createStudentDetailsIntent(student)
                 startActivity(intent)
