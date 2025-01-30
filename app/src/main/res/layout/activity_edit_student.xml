@@ -42,7 +42,7 @@
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edit_student_activity_save_button"
-        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toEndOf="@+id/edit_student_activity_student_cancel_button" />
 
     <TextView
