@@ -10,10 +10,24 @@
     android:longClickable="false"
     tools:context=".EditStudentActivity">
 
+    <!-- Toolbar for ActionBar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.Material3.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.Material3.ActionBar"
+        app:title="Edit Student" />
+
     <Button
         android:id="@+id/edit_student_activity_student_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +42,7 @@
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edit_student_activity_save_button"
-        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toEndOf="@+id/edit_student_activity_student_cancel_button" />
 
     <TextView
@@ -59,11 +73,11 @@
         android:id="@+id/details_activity_student_image_view"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
         app:srcCompat="@drawable/avatar" />
 
     <TextView
@@ -84,7 +98,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:text="ID"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/details_activity_student_id_title_text_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -122,6 +136,7 @@
         android:id="@+id/edit_student_activity_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="20dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
