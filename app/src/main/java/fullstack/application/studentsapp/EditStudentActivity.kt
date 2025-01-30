@@ -2,6 +2,7 @@ package fullstack.application.studentsapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -35,12 +36,24 @@ class EditStudentActivity : AppCompatActivity() {
         findViewById<EditText>(edit_student_activity_id_value_text_view).setText(studentId)
         findViewById<TextView>(edit_student_activity_name_value_text_view).setText(studentName)
         findViewById<Button>(R.id.edit_student_activity_student_cancel_button).setOnClickListener {
-            val intent = createEditStudentIntent(studentId, studentName, studentChecked)
-            startActivity(intent)
+            if (position !== -1) {
+                val intent = createEditStudentIntent(studentId, studentName, studentChecked)
+                startActivity(intent)
+            } else {
+                startActivity(Intent(
+                        this@EditStudentActivity,
+                        StudentsRecyclerViewActivity::class.java
+                    )
+                )
+            }
             finish()
         }
 
-        findViewById<Button>(R.id.edit_student_activity_student_delete_button).setOnClickListener {
+        val deleteButton = findViewById<Button>(R.id.edit_student_activity_student_delete_button)
+        if (position !== -1) {
+            deleteButton.visibility = View.VISIBLE
+        }
+        deleteButton.setOnClickListener {
             Model.shared.students.removeAt(position)
             startActivity(Intent(this@EditStudentActivity, StudentsRecyclerViewActivity::class.java))
             finish()
