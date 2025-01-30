@@ -10,7 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import fullstack.application.studentsapp.R.id.details_activity_student_id_value_text_view
 import fullstack.application.studentsapp.R.id.edit_student_activity_check_box
 import fullstack.application.studentsapp.R.id.edit_student_activity_id_value_text_view
 import fullstack.application.studentsapp.R.id.edit_student_activity_name_value_text_view
@@ -29,13 +28,13 @@ class EditStudentActivity : AppCompatActivity() {
         }
         var studentId = intent.getStringExtra("student_id")
         var studentName = intent.getStringExtra("student_name")
-        var studentChecked = intent.getBooleanExtra("student_checked", false)
+        val studentIsChecked = intent.getBooleanExtra("student_checked", false)
         val position = intent.getIntExtra("student_position", -1)
 
         findViewById<EditText>(edit_student_activity_id_value_text_view).setText(studentId)
         findViewById<TextView>(edit_student_activity_name_value_text_view).setText(studentName)
         findViewById<Button>(R.id.edit_student_activity_student_cancel_button).setOnClickListener {
-            val intent = createEditStudentIntent(studentId, studentName, studentChecked)
+            val intent = createEditStudentIntent(studentId, studentName, studentIsChecked)
             startActivity(intent)
             finish()
         }
@@ -45,27 +44,22 @@ class EditStudentActivity : AppCompatActivity() {
             startActivity(Intent(this@EditStudentActivity, StudentsRecyclerViewActivity::class.java))
             finish()
         }
+        val studentIsCheckedButton = findViewById<CheckBox>(edit_student_activity_check_box)
         findViewById<Button>(R.id.edit_student_activity_save_button).setOnClickListener {
             studentId = findViewById<EditText>(edit_student_activity_id_value_text_view).text.toString()
             studentName = findViewById<EditText>(edit_student_activity_name_value_text_view).text.toString()
-            studentChecked = findViewById<CheckBox>(edit_student_activity_check_box).isChecked
-            studentId.let {
-                    studentName.let {
-                        if (position !== -1) {
+            studentIsCheckedButton.isChecked
+            studentId?.let { id ->
+                    studentName?.let { name ->
                             Model.shared.students[position] =
-                                Student(studentId!!, studentName!!, studentChecked)
-                        } else {
-                            Model.shared.students.add(Student(studentId!!, studentName!!, studentChecked))
-                    }
+                                Student(id, name, studentIsChecked)
+                        }
                 }
-            }
-            val intent = createEditStudentIntent(studentId, studentName, studentChecked)
+            val intent = createEditStudentIntent(studentId, studentName, studentIsChecked)
             startActivity(intent)
             finish()
         }
-        val checked = findViewById<CheckBox>(edit_student_activity_check_box)
-        checked.isChecked = studentChecked
-        checked.isEnabled = true
+        studentIsCheckedButton.isChecked = studentIsChecked
     }
 
     private fun createEditStudentIntent(id: String?, name: String?, isChecked: Boolean): Intent? {

@@ -8,42 +8,17 @@
     android:clickable="false"
     android:contextClickable="false"
     android:longClickable="false"
-    tools:context=".EditStudentActivity">
-
-    <!-- Toolbar for ActionBar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/main_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.Material3.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.Material3.ActionBar"
-        app:title="Edit Student" />
+    tools:context=".AddStudentActivity">
 
     <Button
-        android:id="@+id/edit_student_activity_student_cancel_button"
+        android:id="@+id/add_student_activity_student_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edit_student_activity_save_button" />
-
-    <Button
-        android:id="@+id/edit_student_activity_student_delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/edit_student_activity_save_button"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toEndOf="@+id/edit_student_activity_student_cancel_button" />
+        app:layout_constraintTop_toTopOf="@+id/add_student_activity_save_button" />
 
     <TextView
         android:id="@+id/details_activity_student_name_title_text_view"
@@ -73,11 +48,11 @@
         android:id="@+id/details_activity_student_image_view"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/avatar" />
 
     <TextView
@@ -93,12 +68,12 @@
         app:layout_constraintTop_toBottomOf="@+id/details_activity_student_name_title_text_view" />
 
     <EditText
-        android:id="@+id/edit_student_activity_id_value_text_view"
+        android:id="@+id/add_student_activity_id_value_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="ID"
+        android:text="Name"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/details_activity_student_id_title_text_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +81,7 @@
         app:layout_constraintStart_toEndOf="@+id/details_activity_student_id_title_text_view" />
 
     <EditText
-        android:id="@+id/edit_student_activity_name_value_text_view"
+        android:id="@+id/add_student_activity_name_value_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -119,7 +94,7 @@
         app:layout_constraintStart_toEndOf="@+id/details_activity_student_name_title_text_view" />
 
     <CheckBox
-        android:id="@+id/edit_student_activity_check_box"
+        android:id="@+id/add_student_activity_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="false"
@@ -133,10 +108,9 @@
         app:layout_constraintStart_toEndOf="@+id/details_activity_student_checked_title_text_view" />
 
     <Button
-        android:id="@+id/edit_student_activity_save_button"
+        android:id="@+id/add_student_activity_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="20dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
