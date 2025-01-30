@@ -10,15 +10,32 @@
     android:longClickable="false"
     tools:context=".AddStudentActivity">
 
+    <!-- Toolbar for ActionBar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.Material3.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.Material3.ActionBar"
+        app:title="Add Student" />
+
     <Button
         android:id="@+id/add_student_activity_student_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/add_student_activity_save_button"
+        app:layout_constraintHorizontal_bias="0.386"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/add_student_activity_save_button" />
+        app:layout_constraintTop_toTopOf="@+id/add_student_activity_save_button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/details_activity_student_name_title_text_view"
@@ -48,11 +65,11 @@
         android:id="@+id/details_activity_student_image_view"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
         app:srcCompat="@drawable/avatar" />
 
     <TextView
@@ -111,6 +128,7 @@
         android:id="@+id/add_student_activity_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="84dp"
         android:layout_marginBottom="20dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
