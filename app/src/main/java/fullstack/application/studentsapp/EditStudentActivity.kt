@@ -49,7 +49,7 @@ class EditStudentActivity : AppCompatActivity() {
             studentId = findViewById<EditText>(edit_student_activity_id_value_text_view).text.toString()
             studentName = findViewById<EditText>(edit_student_activity_name_value_text_view).text.toString()
             studentChecked = findViewById<CheckBox>(edit_student_activity_check_box).isActivated
-                studentId.let {
+            studentId.let {
                     studentName.let {
                         if (position !== -1) {
                             Model.shared.students[position] =

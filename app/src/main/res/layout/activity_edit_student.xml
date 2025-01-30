@@ -17,7 +17,8 @@
         android:layout_marginBottom="16dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_student_activity_student_delete_button" />
 
     <Button
         android:id="@+id/edit_student_activity_student_delete_button"
@@ -26,7 +27,7 @@
         android:layout_marginBottom="20dp"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/details_activity_student_save_button"
+        app:layout_constraintEnd_toStartOf="@+id/edit_student_activity_save_button"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toEndOf="@+id/edit_student_activity_student_cancel_button" />
 
