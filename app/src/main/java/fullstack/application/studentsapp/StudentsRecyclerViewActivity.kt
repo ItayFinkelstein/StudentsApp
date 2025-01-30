@@ -18,7 +18,6 @@ import fullstack.application.studentsapp.model.Student
 
 interface OnItemClickListener {
     fun onItemClick(position: Int)
-    fun onItemClick(student: Student?)
 }
 
 var shownStudentPosition: Int? = -1
@@ -64,13 +63,6 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on item in position: $position")
                 val student = Model.shared.students.get(position)
                 shownStudentPosition = position
-                val intent = createStudentDetailsIntent(student)
-                startActivity(intent)
-            }
-
-            override fun onItemClick(student: Student?) {
-                Log.d("StudentsRecyclerViewActivity", "On click listener on student: ${student?.id} - ${student?.name}")
-                shownStudentPosition = 0
                 val intent = createStudentDetailsIntent(student)
                 startActivity(intent)
             }
