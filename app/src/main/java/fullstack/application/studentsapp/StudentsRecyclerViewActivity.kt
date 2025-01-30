@@ -79,28 +79,4 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
     }
-
-//    override fun onStart() {
-//        val studentId = intent.getStringExtra("student_id")
-//        studentId?.let {
-//            val studentName = intent.getStringExtra("student_name")
-//            val studentChecked = intent.getBooleanExtra("student_checked", false)
-//            if (shownStudentPosition !== -1 && studentName !== null && shownStudentPosition != null && shownStudentPosition in Model.shared.students.indices) {
-//                Model.shared.students.set(shownStudentPosition!!, Student(studentId, studentName, studentChecked))
-//            } else {
-//                if (shownStudentPosition === -1 && studentId !== null && studentName !== null) {
-//                    Model.shared.students.add(Student(studentId, studentName, studentChecked))
-//                } else {
-//                    Log.d("StudentsRecyclerViewActivity", "wrong data in onStart")
-//                }
-//            }
-//        } ?: run {
-//            if (shownStudentPosition !== null && shownStudentPosition !== -1) {
-//                Model.shared.students.removeAt(shownStudentPosition!!)
-//            }
-//            shownStudentPosition = -1
-//        }
-//
-//        super.onStart()
-//    }
 }
