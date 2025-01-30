@@ -42,7 +42,7 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
         val addStudentButton: Button = findViewById(R.id.activity_students_add_button)
         addStudentButton.setOnClickListener {
-            val intent = Intent(this, StudentDetailsActivity::class.java)
+            val intent = Intent(this, EditStudentActivity::class.java)
             startActivity(intent)
         }
     }
@@ -90,14 +90,16 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
     override fun onStart() {
 
-        var studentId = intent.getStringExtra("student_id")
+        val studentId = intent.getStringExtra("student_id")
         studentId?.let {
-            var studentName = intent.getStringExtra("student_name")
-            var studentChecked = intent.getBooleanExtra("student_checked", false)
+            val studentName = intent.getStringExtra("student_name")
+            val studentChecked = intent.getBooleanExtra("student_checked", false)
             if (shownStudentPosition !== -1 && studentName !== null && shownStudentPosition != null && shownStudentPosition in students?.indices ?: emptyList()) {
                 students?.set(shownStudentPosition!!, Student(studentId, studentName, studentChecked))
             } else {
-                // Handle the case when position or newStudent is null or out of bounds
+                if (shownStudentPosition === -1 && studentId !== null && studentName !== null) {
+                    students?.add(Student(studentId, studentName, studentChecked))
+                }
                 println("Invalid position or student data")
             }
         }
