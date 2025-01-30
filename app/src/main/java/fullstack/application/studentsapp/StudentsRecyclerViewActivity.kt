@@ -18,12 +18,12 @@ import fullstack.application.studentsapp.model.Student
 
 interface OnItemClickListener {
     fun onItemClick(position: Int)
-    fun onItemClick(student: Student?)
 }
+
+var shownStudentPosition: Int? = -1
 
 class StudentsRecyclerViewActivity : AppCompatActivity() {
 
-    var students: MutableList<Student>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,8 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
         val addStudentButton: Button = findViewById(R.id.activity_students_add_button)
         addStudentButton.setOnClickListener {
-            val intent = Intent(this, StudentDetailsActivity::class.java)
+            val intent = Intent(this, EditStudentActivity::class.java).apply {
+            }
             startActivity(intent)
         }
     }
@@ -55,18 +56,13 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
     }
 
     private fun setupAdapter(recyclerView: RecyclerView) {
-        students = Model.shared.students
-        val adapter = StudentsRecyclerAdapter(students ?: mutableListOf())
+        Model.shared.students
+        val adapter = StudentsRecyclerAdapter(Model.shared.students)
         adapter.listener = object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d("StudentsRecyclerViewActivity", "On click listener on item in position: $position")
-                val student = students?.get(position)
-                val intent = createStudentDetailsIntent(student)
-                startActivity(intent)
-            }
-
-            override fun onItemClick(student: Student?) {
-                Log.d("StudentsRecyclerViewActivity", "On click listener on student: ${student?.id} - ${student?.name}")
+                val student = Model.shared.students.get(position)
+                shownStudentPosition = position
                 val intent = createStudentDetailsIntent(student)
                 startActivity(intent)
             }
@@ -76,6 +72,7 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
                     putExtra("student_id", student?.id)
                     putExtra("student_name", student?.name)
                     putExtra("student_checked", student?.isChecked)
+                    putExtra("student_position", shownStudentPosition)
                 }
             }
         }
